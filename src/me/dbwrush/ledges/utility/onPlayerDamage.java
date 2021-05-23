@@ -33,6 +33,10 @@ public class onPlayerDamage implements Listener {
     public void playerDamage(EntityDamageByEntityEvent event) {
         if (event.getEntity().getWorld() == this.main.world && (event.getEntity() instanceof Player || !(event.getDamager() instanceof Player))) {
             Player player = (Player)event.getEntity();
+            if(player.getLocation().getY() > main.world.getSpawnLocation().getY() - 10) {
+                event.setCancelled(true);
+                return;
+            }
             Player attacker = (Player)event.getDamager();
             lastHit.put(player, attacker);
             if (attacker.getFoodLevel() < 20) {
@@ -42,9 +46,9 @@ public class onPlayerDamage implements Listener {
             player.setFoodLevel(player.getFoodLevel() - 1);
             if (!playerData.containsKey(player)) {
                 playerData.put(player, 1);
-            } else if ((Integer)playerData.get(player) < 1000) {
+            } else /*if ((Integer)playerData.get(player) < 1000)*/ {
                 playerData.put(player, (Integer)playerData.get(player) + 1);
-            } else {
+            } /*else {
                 player.teleport(this.main.world.getSpawnLocation());
                 playerData.put(player, 0);
                 Iterator var5 = this.main.world.getPlayers().iterator();
@@ -53,7 +57,7 @@ public class onPlayerDamage implements Listener {
                     Player p = (Player)var5.next();
                     p.sendMessage(ChatColor.GOLD + player.getName() + ChatColor.GREEN + " was killed!");
                 }
-            }
+            }*/
 
             player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText("§4§l" + playerData.get(player) + "%"));
             Vector direction = player.getLocation().toVector().subtract(attacker.getLocation().toVector()).normalize();
