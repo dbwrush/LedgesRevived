@@ -1,0 +1,6 @@
+main: me.dbwrush.ledges.Main
+name: LedgesRevived
+description: Ledges minigame by dbwrush
+version: 1.0
+author: dbwrush
+api-version: 1.16
