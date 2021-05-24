@@ -3,7 +3,7 @@
 // (powered by FernFlower decompiler)
 //
 
-package me.dbwrush.ledges.utility;
+package me.dbwrush.ledges.utility.events;
 
 import me.dbwrush.ledges.Main;
 import org.bukkit.Bukkit;
@@ -23,7 +23,7 @@ public class onPlayerJoin implements Listener {
     @EventHandler
     public void playerJoin(PlayerJoinEvent event) {
         onPlayerDamage.playerData.put(event.getPlayer(), 0);
-        Bukkit.getLogger().log(Level.INFO, event.getPlayer().getName() + " added to Ledges game!");
+        Bukkit.getLogger().log(Level.INFO, "[Ledges] " + event.getPlayer().getName() + " added to Ledges game!");
         event.getPlayer().teleport(main.world.getSpawnLocation());
     }
 }

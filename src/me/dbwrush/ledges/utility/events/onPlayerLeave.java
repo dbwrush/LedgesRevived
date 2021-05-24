@@ -3,7 +3,7 @@
 // (powered by FernFlower decompiler)
 //
 
-package me.dbwrush.ledges.utility;
+package me.dbwrush.ledges.utility.events;
 
 import java.util.Iterator;
 import java.util.logging.Level;
@@ -34,7 +34,7 @@ public class onPlayerLeave implements Listener {
 
     @EventHandler
     public void playerChangeWorld(PlayerChangedWorldEvent event) {
-        Bukkit.getLogger().log(Level.INFO, "Player " + event.getPlayer() + " changed worlds.");
+        Bukkit.getLogger().log(Level.INFO, "[Ledges] Player " + event.getPlayer() + " changed worlds.");
         final Player p = event.getPlayer();
         if (Main.plugin.world == null) {
             Main.plugin.world = Bukkit.getWorld(Main.plugin.world.getName());
@@ -43,7 +43,7 @@ public class onPlayerLeave implements Listener {
         if (p.getWorld().getName().equals(Main.plugin.world.getName())) {
             (new BukkitRunnable() {
                 public void run() {
-                    Bukkit.getLogger().log(Level.INFO, "Cleared inventory of leaving player " + p.getName());
+                    Bukkit.getLogger().log(Level.INFO, "[Ledges] Cleared inventory of leaving player " + p.getName());
                     p.getInventory().clear();
                 }
             }).runTaskLater(this.main, 3L);
@@ -53,7 +53,7 @@ public class onPlayerLeave implements Listener {
 
     public void sendMessage(String message, Player p) {
         Iterator var4 = Main.getPlugin().world.getPlayers().iterator();
-        Bukkit.getLogger().log(Level.INFO, "Sending [" + message + "] to all players");
+        Bukkit.getLogger().log(Level.INFO, "[Ledges] Sending [" + message + "] to all players");
         while(var4.hasNext()) {
             Player player = (Player)var4.next();
             player.sendMessage(ChatColor.GOLD + p.getName() + ChatColor.GREEN + message);

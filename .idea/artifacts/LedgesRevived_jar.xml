@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="LedgesRevived:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/LedgesRevived_jar</output-path>
+    <root id="archive" name="LedgesRevived.jar">
+      <element id="module-output" name="LedgesRevived" />
+    </root>
+  </artifact>
+</component>

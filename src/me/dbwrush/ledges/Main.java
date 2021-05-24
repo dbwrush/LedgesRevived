@@ -7,10 +7,11 @@ package me.dbwrush.ledges;
 
 import java.util.logging.Level;
 
-import me.dbwrush.ledges.utility.onPlayerDamage;
-import me.dbwrush.ledges.utility.onPlayerJoin;
-import me.dbwrush.ledges.utility.onPlayerLeave;
-import me.dbwrush.ledges.utility.onPlayerMove;
+import me.dbwrush.ledges.utility.LeaderboardManager;
+import me.dbwrush.ledges.utility.events.onPlayerDamage;
+import me.dbwrush.ledges.utility.events.onPlayerJoin;
+import me.dbwrush.ledges.utility.events.onPlayerLeave;
+import me.dbwrush.ledges.utility.events.onPlayerMove;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.plugin.PluginManager;
@@ -22,6 +23,7 @@ public class Main extends JavaPlugin {
     public int startZ;
     public World world;
     public static Main plugin;
+    public static LeaderboardManager leaderboard;
 
     public Main() {
     }
@@ -39,9 +41,12 @@ public class Main extends JavaPlugin {
         Bukkit.getLogger().log(Level.INFO, "[Ledges] Plugin has started!");
         this.world = Bukkit.getServer().getWorld("world");
         this.registerListeners();
+        leaderboard = new LeaderboardManager();
     }
 
     public void onDisable() {
+        leaderboard.writeFile();
+        Bukkit.getLogger().log(Level.INFO, "[Ledges] Writing leaderboard data to file.");
         Bukkit.getLogger().log(Level.INFO, "[Ledges] Plugin has shut down!");
     }
 

@@ -3,7 +3,7 @@
 // (powered by FernFlower decompiler)
 //
 
-package me.dbwrush.ledges.utility;
+package me.dbwrush.ledges.utility.events;
 
 import java.util.HashMap;
 import java.util.Iterator;
