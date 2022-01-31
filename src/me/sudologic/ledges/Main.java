@@ -52,6 +52,10 @@ public class Main extends JavaPlugin {
     public void onEnable() {
         this.Plugin(this);
         Bukkit.getLogger().log(Level.INFO, "[Ledges] Plugin has started!");
+
+        createCustomConfig();
+        createConfigs();
+
         this.world = Bukkit.getServer().getWorld(worldName);
         leaderboard = new LeaderboardManager();
         this.registerCommands();
