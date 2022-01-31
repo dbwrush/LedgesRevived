@@ -1,6 +1,10 @@
-main: me.dbwrush.ledges.Main
+main: me.sudologic.ledges.Main
 name: LedgesRevived
-description: Ledges minigame by dbwrush
-version: 1.0
-author: dbwrush
-api-version: 1.16
+description: Ledges minigame by sudologic
+version: 1.1
+author: sudologic
+api-version: 1.18
+commands:
+  ShowLeaderboard:
+    description: Displays the leaderboard
+    usage: /ShowLeaderboard

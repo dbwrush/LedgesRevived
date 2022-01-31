@@ -3,9 +3,9 @@
 // (powered by FernFlower decompiler)
 //
 
-package me.dbwrush.ledges.utility.events;
+package me.sudologic.ledges.utility.events;
 
-import me.dbwrush.ledges.Main;
+import me.sudologic.ledges.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

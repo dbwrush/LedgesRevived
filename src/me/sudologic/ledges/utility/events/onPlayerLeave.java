@@ -3,12 +3,12 @@
 // (powered by FernFlower decompiler)
 //
 
-package me.dbwrush.ledges.utility.events;
+package me.sudologic.ledges.utility.events;
 
 import java.util.Iterator;
 import java.util.logging.Level;
 
-import me.dbwrush.ledges.Main;
+import me.sudologic.ledges.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;

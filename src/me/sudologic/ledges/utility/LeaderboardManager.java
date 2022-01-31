@@ -1,10 +1,8 @@
-package me.dbwrush.ledges.utility;
+package me.sudologic.ledges.utility;
 
-import me.dbwrush.ledges.Main;
-import me.dbwrush.ledges.utility.events.onPlayerDamage;
+import me.sudologic.ledges.Main;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Sound;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 import java.io.*;
@@ -14,7 +12,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.UUID;
 import java.util.logging.Level;
 
@@ -24,16 +21,17 @@ public class LeaderboardManager {
         private int kills;
         private int deaths;
 
-        public PlayerStats(Player player) {
+        public PlayerStats(OfflinePlayer player) {
             this.p = player.getUniqueId();
         }
 
         public PlayerStats(String fileLine) {
             String[] parts = fileLine.split(" ");
+
             p = UUID.fromString(parts[0]);
             kills = Integer.parseInt(parts[1]);
             deaths = Integer.parseInt(parts[2]);
-            //Bukkit.getLogger().log(Level.INFO, "[Ledges] loaded stats for " + Bukkit.getPlayer(p) + " Kills: " + kills + " Deaths: " + deaths);
+            Bukkit.getLogger().log(Level.INFO, "[Ledges] loaded stats for " + Bukkit.getOfflinePlayer(p) + " Kills: " + kills + " Deaths: " + deaths);
         }
 
         public String getFileLine() {
@@ -72,7 +70,7 @@ public class LeaderboardManager {
     }
 
     private HashMap<UUID, PlayerStats> statMap;
-    private ArrayList<Player> leaderboard;
+    private ArrayList<OfflinePlayer> leaderboard;
 
     public LeaderboardManager() {
         statMap = readFile();
@@ -81,9 +79,9 @@ public class LeaderboardManager {
         //printMap();
     }
 
-    public PlayerStats getPlayerStats(Player p) {
+    public PlayerStats getPlayerStats(OfflinePlayer p) {
         if(!statMap.containsKey(p.getUniqueId())) {
-            statMap.put(p.getUniqueId(), new PlayerStats(p.getPlayer()));
+            statMap.put(p.getUniqueId(), new PlayerStats(p));
         }
         return statMap.get(p.getUniqueId());
     }
@@ -141,19 +139,19 @@ public class LeaderboardManager {
         for(PlayerStats stats : statMap.values()) {
             double kd = stats.getKD();
             if(leaderboard.size() <= 0) {
-                leaderboard.add(Bukkit.getPlayer(stats.p));
+                leaderboard.add(Bukkit.getOfflinePlayer(stats.p));
             } else {
                 boolean added = false;
                 for(int i = 0; i < leaderboard.size(); i++) {
                     PlayerStats otherStats = statMap.get(leaderboard.get(i).getUniqueId());
                     if(kd > otherStats.getKD()) {
-                        leaderboard.add(i, Bukkit.getPlayer(stats.p));
+                        leaderboard.add(i, Bukkit.getOfflinePlayer(stats.p));
                         added = true;
                         break;
                     }
                 }
                 if(!added) {
-                    leaderboard.add(Bukkit.getPlayer(stats.p));
+                    leaderboard.add(Bukkit.getOfflinePlayer(stats.p));
                 }
             }
         }
@@ -161,17 +159,27 @@ public class LeaderboardManager {
         //printLeaderboard();
     }
 
+    public String[] getLeaderboardLines() {
+        String[] strings = new String[leaderboard.size()];
+        for(int i = 0; i < strings.length; i++) {
+            OfflinePlayer p = leaderboard.get(i);
+            PlayerStats pStats = getPlayerStats(p);
+            strings[i] = p.getName() + " K: " + pStats.kills + " D: " + pStats.deaths;
+        }
+        return strings;
+    }
+
     public void printLeaderboard() {
-        System.out.println("[Ledges] Printing current leaderboard:");
-        for(Player p : leaderboard) {
-            System.out.println("[Ledges] "+ leaderboard.indexOf(p) + " " + p.getName());
+        Bukkit.getLogger().log(Level.INFO, "[Ledges] Printing current leaderboard:");
+        for(OfflinePlayer p : leaderboard) {
+            Bukkit.getLogger().log(Level.INFO, "[Ledges] "+ leaderboard.indexOf(p) + " " + p.getName());
         }
     }
 
     public void printMap() {
-        System.out.println("[Ledges] Printing current player map:");
+        Bukkit.getLogger().log(Level.INFO, "[Ledges] Printing current player map:");
         for(PlayerStats ps : statMap.values()) {
-            System.out.println("[Ledges] " + Bukkit.getPlayer(ps.p) + " " + ps.getFileLine());
+            Bukkit.getLogger().log(Level.INFO, "[Ledges] " + Bukkit.getOfflinePlayer(ps.p) + " " + ps.getFileLine());
         }
     }
 }

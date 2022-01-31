@@ -3,15 +3,14 @@
 // (powered by FernFlower decompiler)
 //
 
-package me.dbwrush.ledges.utility.events;
+package me.sudologic.ledges.utility.events;
 
 import java.util.Iterator;
-import java.util.logging.Level;
 
-import me.dbwrush.ledges.Main;
-import me.dbwrush.ledges.utility.LeaderboardManager;
-import org.bukkit.Bukkit;
+import me.sudologic.ledges.Main;
+import me.sudologic.ledges.utility.LeaderboardManager;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -30,7 +29,7 @@ public class onPlayerMove implements Listener {
     public void playerMove(PlayerMoveEvent event) {
         Player p = event.getPlayer();
         if (p.getWorld() == this.main.world) {
-            if (p.getLocation().getY() < 30.0D) {
+            if (p.getLocation().getY() < main.floor) {
                 Player attacker = p;
                 if (onPlayerDamage.lastHit.containsKey(p)) {
                     Iterator var4 = this.main.world.getPlayers().iterator();
@@ -42,8 +41,11 @@ public class onPlayerMove implements Listener {
                     attacker = (Player)onPlayerDamage.lastHit.get(p);
                     onPlayerDamage.lastHit.remove(p);
                 }
-
-                p.teleport(this.main.world.getSpawnLocation());
+                if(main.useWorldSpawn) {
+                    p.teleport(this.main.world.getSpawnLocation());
+                } else {
+                    p.teleport(new Location(main.world, main.startX, main.startY, main.startZ));
+                }
                 p.setFoodLevel(20);
                 p.setHealth(20);
                 p.setVelocity(new Vector(0, 0, 0));

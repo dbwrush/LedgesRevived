@@ -3,12 +3,11 @@
 // (powered by FernFlower decompiler)
 //
 
-package me.dbwrush.ledges.utility.events;
+package me.sudologic.ledges.utility.events;
 
 import java.util.HashMap;
-import java.util.Iterator;
-import me.dbwrush.ledges.Main;
-import net.md_5.bungee.api.ChatColor;
+
+import me.sudologic.ledges.Main;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.GameMode;
