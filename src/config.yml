@@ -10,6 +10,6 @@ spawnX: 0
 spawnY: 80
 spawnZ: 0
 
-#Controlls how far players should fall before being teleported back to the spawnpoint.
+#Controls how far players should fall before being teleported back to the spawnpoint.
 #Will NOT prevent void damage, recommend values HIGHER than zero.
 floor: 0

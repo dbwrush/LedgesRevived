@@ -38,7 +38,7 @@ public class onPlayerMove implements Listener {
                         player.sendMessage(ChatColor.GOLD + p.getName() + ChatColor.GREEN + " was knocked off by " + ChatColor.GOLD + ((Player)onPlayerDamage.lastHit.get(p)).getName());
                         player.playSound(p.getLocation(), Sound.ENTITY_LIGHTNING_BOLT_THUNDER, 10.0F, 10.0F);
                     }
-                    attacker = (Player)onPlayerDamage.lastHit.get(p);
+                    attacker = onPlayerDamage.lastHit.get(p);
                     onPlayerDamage.lastHit.remove(p);
                 }
                 if(main.useWorldSpawn) {
